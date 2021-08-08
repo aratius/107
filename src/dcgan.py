@@ -38,6 +38,7 @@ discriminator = keras.Sequential(
     layers.Dropout(0.2),
     layers.Conv2D(128, kernel_size=4, strides=2, padding="same"),
     layers.LeakyReLU(alpha=0.2),
+    layers.Dropout(0.2),
     layers.Flatten(),
     layers.Dropout(0.2),
     # 全結合層 出力
@@ -56,28 +57,29 @@ generator= keras.Sequential(
     layers.Dense(16 * 16 * 128),
     layers.Reshape((16, 16, 128)),
     layers.Conv2DTranspose(128, kernel_size=4, strides=2, padding="same"),
-    layers.LeakyReLU(alpha=0.2),
+    layers.ReLU(),  # ReLUにした
     layers.BatchNormalization(),
     layers.Conv2DTranspose(256, kernel_size=4, strides=2, padding="same"),
-    layers.LeakyReLU(alpha=0.2),
+    layers.ReLU(),  # ReLUにした
     layers.BatchNormalization(),
     layers.Conv2DTranspose(512, kernel_size=4, strides=2, padding="same"),
-    layers.LeakyReLU(alpha=0.2),
-    layers.BatchNormalization(),
-    layers.Conv2D(3, kernel_size=5, padding="same", activation="sigmoid")
+    layers.ReLU(),  # ReLUにした
+    # layers.BatchNormalization(),
+    layers.Conv2D(3, kernel_size=5, padding="same", activation="sigmoid"),
   ],
   name="generator"
 )
 # 正常に動くかチェック
 generator.summary()
 
-epochs = 500  # In practice, use ~100 epochs
+epochs = 200  # In practice, use ~100 epochs
 # GANをインスタンス化
+discriminator.trainable = False
 gan = GAN(discriminator=discriminator, generator=generator, latent_dim=latent_dim)
 # 最適化手法を設定
 gan.compile(
-    d_optimizer=keras.optimizers.Adam(learning_rate=0.0001),
-    g_optimizer=keras.optimizers.Adam(learning_rate=0.0001),
+    d_optimizer=keras.optimizers.Adam(learning_rate=0.00001, beta_1=0.1),  # beta_1てなに
+    g_optimizer=keras.optimizers.Adam(learning_rate=0.0002, beta_1=0.5),  # を強くする
     loss_fn=keras.losses.BinaryCrossentropy(),
 )
 
