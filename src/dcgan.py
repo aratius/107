@@ -78,8 +78,8 @@ discriminator.trainable = False
 gan = GAN(discriminator=discriminator, generator=generator, latent_dim=latent_dim)
 # 最適化手法を設定
 gan.compile(
-    d_optimizer=keras.optimizers.Adam(learning_rate=0.00001, beta_1=0.1),  # beta_1てなに
-    g_optimizer=keras.optimizers.Adam(learning_rate=0.0002, beta_1=0.5),  # を強くする
+    d_optimizer=keras.optimizers.Adam(learning_rate=0.0001, beta_1=0.1),  # beta_1てなに
+    g_optimizer=keras.optimizers.Adam(learning_rate=0.0003, beta_1=0.5),  # を強くする
     loss_fn=keras.losses.BinaryCrossentropy(),
 )
 
