@@ -78,10 +78,8 @@ epochs = 200  # In practice, use ~100 epochs
 gan = GAN(discriminator=discriminator, generator=generator, latent_dim=latent_dim)
 # 最適化手法を設定
 gan.compile(
-    # d_optimizer=keras.optimizers.Adam(learning_rate=0.0001, beta_1=0.1),  # beta_1てなに
-    # g_optimizer=keras.optimizers.Adam(learning_rate=0.0003, beta_1=0.2),  # を強くする
-    d_optimizer=keras.optimizers.Adam(learning_rate=0.00008),  # beta_1てなに
-    g_optimizer=keras.optimizers.Adam(learning_rate=0.0003),  # を強くする
+    d_optimizer=keras.optimizers.Adam(learning_rate=1e-5, beta_1=0.1),  # beta_1てなに
+    g_optimizer=keras.optimizers.Adam(learning_rate=2e-4, beta_1=0.5),  # を強くする
     loss_fn=keras.losses.BinaryCrossentropy(),
 )
 
