@@ -95,3 +95,5 @@ gan.fit(
 # 最後にもモデル保存
 generator.save(train_model_path + "gen/" +  + project_name + "/last.h5")
 discriminator.save(train_model_path + "disc/" +  + project_name + "/last.h5")
+
+print("hoge")
