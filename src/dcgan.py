@@ -78,8 +78,8 @@ epochs = 200  # In practice, use ~100 epochs
 gan = GAN(discriminator=discriminator, generator=generator, latent_dim=latent_dim)
 # 最適化手法を設定
 gan.compile(
-    d_optimizer=keras.optimizers.Adam(learning_rate=1e-5, beta_1=0.1),  # beta_1てなに
-    g_optimizer=keras.optimizers.Adam(learning_rate=2e-4, beta_1=0.5),  # を強くする
+    d_optimizer=keras.optimizers.Adam(learning_rate=(1e-5)*4, beta_1=0.1),  # beta_1てなに
+    g_optimizer=keras.optimizers.Adam(learning_rate=(2e-4)*4, beta_1=0.5),  # を強くする
     loss_fn=keras.losses.BinaryCrossentropy(),
 )
 
@@ -89,9 +89,9 @@ discriminator.save(train_model_path + "disc/" + project_name + "/test.h5")
 
 # 学習
 gan.fit(
-    dataset, epochs=epochs, callbacks=[GANMonitor(num_img=10, latent_dim=latent_dim, proj_name=project_name), ModelSaver(generator, discriminator)]
+    dataset, epochs=epochs, callbacks=[GANMonitor(num_img=10, latent_dim=latent_dim, proj_name=project_name), ModelSaver(generator, discriminator, proj_name=project_name)]
 )
 
 # 最後にもモデル保存
-generator.save(train_model_path + "gen/" +  + project_name + "/last.h5")
-discriminator.save(train_model_path + "disc/" +  + project_name + "/last.h5")
+generator.save(train_model_path + "gen/" + project_name + "/last.h5")
+discriminator.save(train_model_path + "disc/" + project_name + "/last.h5")
