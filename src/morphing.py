@@ -19,7 +19,7 @@ z_dim = 128
 img_num = 58
 
 #モーフィングを保存するフォルダ
-img_f = 'assets/generated/1113_morphing_4/'
+img_f = 'assets/generated/1113_morphing_5/'
 #======================================
 
 def create_gif(index):
@@ -43,12 +43,10 @@ def create_gif(index):
     imgs_array = model.predict(zs)
     imgs = []
     for i in range(len(imgs_array)):
-        img = keras.preprocessing.image.array_to_img(imgs_array[i])
-        # img = Image.fromarray(np.uint8(imgs_array[i] * 127.5 + 127.5))
+        # img = keras.preprocessing.image.array_to_img(imgs_array[i])
+        img = Image.fromarray(np.uint8(imgs_array[i] * 255))
         imgs.append(img)
     #======================================
-
-    print("hello ------------------------------------")
 
     #保存用フォルダ作成
     if not os.path.isdir(img_f):
