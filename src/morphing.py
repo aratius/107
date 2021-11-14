@@ -13,20 +13,20 @@ from src.utils.generate import create_morphing
 #======================================
 #使用する重み
 para = 'assets/train_model/gen/0913/0913gen_epoch400.h5'
-
 #乱数列の次元
 z_dim = 128
 #補完数（58だと60枚出ます）
 img_num = 58
-
 #モーフィングを保存するフォルダ
 img_f = 'assets/generated/1113_morphing_7/'
 #======================================
 
 def create_gif(index):
 
+    # モデルのローディング
     model = load_model(para)
 
+    # 画像の生成 画像配列が帰ってくる 外部関数
     imgs = create_morphing(model, z_dim, img_num)
 
     #保存用フォルダ作成
