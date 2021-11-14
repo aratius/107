@@ -20,7 +20,7 @@ def create_img(model):
   print(img_str)
 
 # モーフィングを作成
-def create_morphing(model, z_dim, img_num, ):
+def create_morphing(model, z_dim, img_num):
   #乱数列１
   a = np.clip(np.random.randn(z_dim), -1, 1)
   print(a)
@@ -37,7 +37,6 @@ def create_morphing(model, z_dim, img_num, ):
 
   #generatorで画像を生成
   #======================================
-  model = load_model(para)
   imgs_array = model.predict(zs)
   imgs = []
   for i in range(len(imgs_array)):
@@ -45,4 +44,4 @@ def create_morphing(model, z_dim, img_num, ):
       imgs.append(img)
   #======================================
 
-  return imgs[0]
+  return imgs
