@@ -7,15 +7,15 @@ from tensorflow.keras import layers
 import numpy as np
 import matplotlib.pyplot as plt
 import sys, os
-sys.path.append("/Users/matsumotoarata/git/ME/Python/GAN")
+sys.path.append("C:\\Users\\Arata Matsumoto\\Documents\\git\\_Envs\\_Python\\FaceGan")
 from src.utils.GAN import GAN
 from src.utils.GANMonitor import GANMonitor
 from src.utils.modelSaver import ModelSaver
 from src.utils.config import train_model_path, generated_path, dataset_path, source_path
 
 # 環境ごとのユニークな値を最初に入力させる
-project_name = input("proj name ?")
-dataset_name = input("dataset dir name ?")
+project_name = input("proj name ? -> ")
+dataset_name = input("dataset dir name ? -> ")
 
 # データセットを作成、値を正規化
 dataset = keras.preprocessing.image_dataset_from_directory(
@@ -84,8 +84,8 @@ gan.compile(
 )
 
 # 最初にモデル保存テスト
-generator.save(train_model_path + "gen/" + project_name + "/test.h5")
-discriminator.save(train_model_path + "disc/" + project_name + "/test.h5")
+generator.save(train_model_path + "gen\\" + project_name + "\\test.h5")
+discriminator.save(train_model_path + "disc\\" + project_name + "\\test.h5")
 
 # 学習
 gan.fit(
@@ -93,5 +93,5 @@ gan.fit(
 )
 
 # 最後にもモデル保存
-generator.save(train_model_path + "gen/" + project_name + "/last.h5")
-discriminator.save(train_model_path + "disc/" + project_name + "/last.h5")
+generator.save(train_model_path + "gen\\" + project_name + "\\last.h5")
+discriminator.save(train_model_path + "disc\\" + project_name + "\\last.h5")
