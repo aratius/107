@@ -25,3 +25,5 @@ model = tf.keras.models.load_model(model_path)
 img = create_img(model)
 for i in range(img_num):
     img.save(proj_path + "\\%d.png" % (i))
+
+os.system("start .\\" + proj_path)

@@ -23,10 +23,9 @@ proj_path = generated_path + "\\manual\\morph\\" + proj_name
 
 #補完数（58だと60枚出ます）
 morph_num = int(input("result num ? ->"))
-point_num = int(input("point num ? "))
+point_num = int(input("point num (2 or higher) ? "))
 img_num = int(input("img num per units ? ->"))
 #======================================
-
 
 #保存用フォルダ作成
 if not os.path.isdir(proj_path):
@@ -62,3 +61,5 @@ def create_gif(index):
 
 for i in range(morph_num):
     create_gif(i)
+
+os.system("start .\\" + proj_path)
