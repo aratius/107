@@ -36,7 +36,7 @@ def create_morphing(model, z_dim, img_num_per_unit, morph_num):
     frame_this = i % img_num
     prev_ratio = (img_num-frame_this)/(img_num+1e-4)
     crr_ratio = frame_this/(img_num+1e-4)
-    print(str(prev_ratio) + "," + str(crr_ratio))
+    print(f'{this_i}->{this_i+1}:{math.floor((prev_ratio * 100))/100:.3f},{math.floor((crr_ratio * 100))/100:.3f}')
     zs[i] = prev * prev_ratio + crr * crr_ratio
   #======================================
 
@@ -45,8 +45,8 @@ def create_morphing(model, z_dim, img_num_per_unit, morph_num):
   imgs_array = model.predict(zs)
   imgs = []
   for i in range(len(imgs_array)):
-      img = Image.fromarray(np.uint8(imgs_array[i] * 255))
-      imgs.append(img)
+    img = Image.fromarray(np.uint8(imgs_array[i] * 255))
+    imgs.append(img)
   #======================================
 
   return imgs
